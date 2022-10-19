@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-export default function Ticket({ name, price }) {
+export default function Ticket({ name, price, isSelected, setTicketSelected }) {
   return (
-    <TicketContainer>
+    <TicketContainer onClick={() => setTicketSelected(name)} isSelected={isSelected}>
       <TicketName>{name}</TicketName>
       <TicketPrice>R$ {price}</TicketPrice>   
     </TicketContainer>
@@ -17,9 +17,10 @@ const TicketContainer = styled.div`
   row-gap: 3px;
   justify-content: center;
   align-items: center;
-  border: 1px solid #CECECE;
+  border: ${props => props.isSelected ? 'none' : '1px solid #CECECE'};
   border-radius: 20px;
   cursor: pointer;
+  ${props => props.isSelected ? 'background: #FFEED2;' : '' };
 `;
 
 const TicketName = styled.h5`
