@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
+import CardsBox from '../../layouts/CardsBox';
 import Subtitle from '../../layouts/Subtitle';
 import Ticket from './Ticket'; 
 import useTicket from '../../hooks/api/useTicket';
@@ -19,19 +20,13 @@ export default function ChoiceOfTicket() {
   return (
     <Container>
       <Subtitle text='Primeiro, escolha sua modalidade de ingresso' />
-      <TicketsBox>
+      <CardsBox>
         { ticketsData.length ? ticketsData.map(ticket => <Ticket key={ticket.id} name={ticket.name} price={ticket.price} isSelected={ticketSelected === ticket.name} setTicketSelected={setTicketSelected}/> ) : '' }
-      </TicketsBox>
+      </CardsBox>
     </Container>
   );
 }
 
 const Container = styled.div`
   margin-bottom: 44px;
-`;
-
-const TicketsBox = styled.div`
-    height: 145px;
-    display: flex;
-    column-gap: 24px;
 `;
