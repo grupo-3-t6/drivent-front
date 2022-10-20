@@ -1,10 +1,13 @@
 import styled from 'styled-components';
 
+import TextCard from '../../layouts/TextCard';
+import SubtitleCard from '../../layouts/SubtitleCard';
+
 export default function Ticket({ name, price, isSelected, setTicketSelected }) {
   return (
     <TicketContainer onClick={() => setTicketSelected(name)} isSelected={isSelected}>
-      <TicketName>{name}</TicketName>
-      <TicketPrice>R$ {price}</TicketPrice>   
+      <TextCard>{name}</TextCard>
+      <SubtitleCard>R$ {price}</SubtitleCard>   
     </TicketContainer>
   );
 }
@@ -22,15 +25,3 @@ const TicketContainer = styled.div`
   cursor: pointer;
   ${props => props.isSelected ? 'background: #FFEED2;' : '' };
 `;
-
-const TicketName = styled.h5`
-  font: 400 16px/19px 'Roboto', sans-serif;
-  text-align: center;
-  color: #454545;
-`;
-
-const TicketPrice = styled.h6`
-  font: 400 14px/16px 'Roboto', sans-serif;
-  text-align: center;
-  color: #898989;
-`;  
