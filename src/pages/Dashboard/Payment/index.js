@@ -1,3 +1,7 @@
+import ChoiceOfTicket from '../../../components/ChoiceOfTicket';
+
 export default function Payment() {
-  return 'Pagamento: Em breve!';
+  return (
+    <ChoiceOfTicket />
+  );
 }
