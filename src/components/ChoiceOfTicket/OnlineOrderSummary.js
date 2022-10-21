@@ -6,7 +6,7 @@ import Subtitle from '../../layouts/Subtitle';
 export default function OnlineOrderSummary({ finalPrice }) {
   return (
     <Container>
-      <Subtitle>Fechado! O total ficou em <strong>R$ {finalPrice}</strong>. Agora é só confirmar</Subtitle>
+      <Subtitle>Fechado! O total ficou em <strong>R$ {finalPrice}</strong>. Agora é só confirmar:</Subtitle>
       <ConfirmButton text = 'RESERVAR INGRESSO'/> 
     </Container> 
   );
