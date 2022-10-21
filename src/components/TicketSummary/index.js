@@ -6,7 +6,7 @@ import TextCard from '../../layouts/TextCard';
 export default function TicketSummary() {
   return (
     <>
-      <Subtitle text='Ingresso escolhido' />
+      <Subtitle>Ingresso escolhido</Subtitle>
       <Card>
         <TextCard>Presencial + Com Hotel</TextCard>
         <SubtitleCard>R$ 600</SubtitleCard>
