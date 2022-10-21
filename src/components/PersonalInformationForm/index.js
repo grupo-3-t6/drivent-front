@@ -58,7 +58,6 @@ export default function PersonalInformationForm() {
       try {
         await saveEnrollment(newData);
         toast('Informações salvas com sucesso!');
-        setEnrolled(true);
       } catch (err) {
         toast('Não foi possível salvar suas informações!');
       }
@@ -94,6 +93,7 @@ export default function PersonalInformationForm() {
         neighborhood: enrollment.address.neighborhood,
         addressDetail: enrollment.address.addressDetail,
       });
+      setEnrolled(true);
     }
   }, [enrollment]);
 
