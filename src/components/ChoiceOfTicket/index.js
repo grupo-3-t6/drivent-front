@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Typography from '@material-ui/core/Typography';
 
+import CardsBox from '../../layouts/CardsBox';
+import Subtitle from '../../layouts/Subtitle';
 import Ticket from './Ticket'; 
 import useTicket from '../../hooks/api/useTicket';
 
@@ -17,29 +18,15 @@ export default function ChoiceOfTicket() {
   }, [tickets]);
 
   return (
-    <>
-      <StyledTypography variant="h4">Ingresso e pagamento</StyledTypography>
-      <Description>Primeiro, escolha sua modalidade de ingresso</Description>
-      <TicketsBox>
+    <Container>
+      <Subtitle text='Primeiro, escolha sua modalidade de ingresso' />
+      <CardsBox>
         { ticketsData.length ? ticketsData.map(ticket => <Ticket key={ticket.id} name={ticket.name} price={ticket.price} isSelected={ticketSelected === ticket.name} setTicketSelected={setTicketSelected}/> ) : '' }
-      </TicketsBox>
-    </>
+      </CardsBox>
+    </Container>
   );
 }
 
-const StyledTypography = styled(Typography)`
-  margin-bottom: 37px!important;
-`;
-
-const Description = styled.p`
-    font: 400 20px/23px 'Roboto', sans-serif;
-    text-align: left;
-    color: #8E8E8E;
-    margin-bottom: 17px;
-`;
-
-const TicketsBox = styled.div`
-    height: 145px;
-    display: flex;
-    column-gap: 24px;
+const Container = styled.div`
+  margin-bottom: 44px;
 `;
