@@ -7,7 +7,7 @@ import useTicket from '../../hooks/api/useTicket';
 
 export default function ChoiceOfTicket() {
   const [ticketsData, setTicketsData] = useState([]);
-  const [ticketSelected, setTicketSelected] = useState(''); 
+  const [ticketSelected, setTicketSelected] = useState({}); 
   const { tickets } = useTicket();
   
   useEffect(() => {
@@ -21,8 +21,11 @@ export default function ChoiceOfTicket() {
       <StyledTypography variant="h4">Ingresso e pagamento</StyledTypography>
       <Description>Primeiro, escolha sua modalidade de ingresso</Description>
       <TicketsBox>
-        { ticketsData.length ? ticketsData.map(ticket => <Ticket key={ticket.id} name={ticket.name} price={ticket.price} isSelected={ticketSelected === ticket.name} setTicketSelected={setTicketSelected}/> ) : '' }
+        { ticketsData.length ? ticketsData.map(ticket => <Ticket key={ticket.id} name={ticket.name} price={ticket.price} isSelected={ticketSelected.name === ticket.name} setTicketSelected={setTicketSelected}/> ) : '' }
       </TicketsBox>
+      <ConfirmBox>
+        { ticketSelected.name === 'Online' ? `Fechado! O total ficou em R$ ${ticketSelected.price}. Agora é só confirmar` : ''}
+      </ConfirmBox>
     </>
   );
 }
@@ -42,4 +45,9 @@ const TicketsBox = styled.div`
     height: 145px;
     display: flex;
     column-gap: 24px;
+`;
+
+const ConfirmBox = styled.div`
+
+
 `;

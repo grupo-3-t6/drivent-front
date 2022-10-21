@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export default function Ticket({ name, price, isSelected, setTicketSelected }) {
   return (
-    <TicketContainer onClick={() => setTicketSelected(name)} isSelected={isSelected}>
+    <TicketContainer onClick={() => setTicketSelected( { name, price } )} isSelected={isSelected}>
       <TicketName>{name}</TicketName>
       <TicketPrice>R$ {price}</TicketPrice>   
     </TicketContainer>
