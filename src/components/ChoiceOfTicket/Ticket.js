@@ -5,7 +5,7 @@ import SubtitleCard from '../../layouts/SubtitleCard';
 
 export default function Ticket({ name, price, isSelected, setTicketSelected }) {
   return (
-    <TicketContainer onClick={() => setTicketSelected(name)} isSelected={isSelected}>
+    <TicketContainer onClick={() => setTicketSelected( { name, price } )} isSelected={isSelected}>
       <TextCard>{name}</TextCard>
       <SubtitleCard>R$ {price}</SubtitleCard>   
     </TicketContainer>
