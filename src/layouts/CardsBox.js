@@ -12,4 +12,5 @@ const Container = styled.div`
     height: 145px;
     display: flex;
     column-gap: 24px;
+    margin-bottom: 44px;
 `;

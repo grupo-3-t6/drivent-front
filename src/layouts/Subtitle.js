@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-export default function Subtitle({ text }) {
+export default function Subtitle({ children }) {
   return (
-    <Container>{text}</Container>
+    <Container>{children}</Container>
   );
 }
 
