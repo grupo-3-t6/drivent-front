@@ -43,6 +43,9 @@ export default function CreditCard() {
             type="tel"
             name="number"
             placeholder="Card Number"
+            pattern="[0-9]{16,22}"
+            required
+            maxLength="22"
             onChange={handleInputChange}
             onFocus={handleInputFocus}
           />
@@ -51,6 +54,8 @@ export default function CreditCard() {
             type="text"
             name="name"
             placeholder="Name"
+            pattern="[a-zA-Z ]{10,30}"
+            required
             onChange={handleInputChange}
             onFocus={handleInputFocus}
           />
@@ -59,10 +64,23 @@ export default function CreditCard() {
               type="text"
               name="expiry"
               placeholder="Valid Thru"
+              pattern="\d\d/\d\d"
+              required
+              maxLength="5"
               onChange={handleInputChange}
               onFocus={handleInputFocus}
             />
-            <CvcInput type="tel" name="cvc" placeholder="CVC" onChange={handleInputChange} onFocus={handleInputFocus} />
+            <CvcInput
+              type="tel"
+              name="cvc"
+              placeholder="CVC"
+              pattern="\d{3,4}"
+              required
+              maxLength="4"
+              minLength="3"
+              onChange={handleInputChange}
+              onFocus={handleInputFocus}
+            />
           </InputSubcontainer>
         </InputsContainer>
         <Button type="submit" style={buttonStyle}>
@@ -72,7 +90,6 @@ export default function CreditCard() {
     </Container>
   );
 }
-
 const Container = styled.div`
   max-width: 706px;
   height: 225px;
