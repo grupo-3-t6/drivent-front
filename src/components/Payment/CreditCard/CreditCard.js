@@ -81,6 +81,9 @@ const Container = styled.div`
   form {
     width: 100%;
   }
+  @media (max-width: 700px) {
+    flex-direction: column;
+  }
   ::-webkit-scrollbar {
     display: none;
   }
@@ -107,6 +110,9 @@ const InputsContainer = styled.div`
     color: #8e8e8e;
     margin-top: 7px;
     margin-bottom: 15px;
+  }
+  @media (max-width: 700px) {
+    margin-top: 20px;
   }
 `;
 
