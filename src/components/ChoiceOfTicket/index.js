@@ -8,11 +8,12 @@ import Ticket from './Ticket';
 import useTicket from '../../hooks/api/useTicket';
 import ConfirmButton from '../../layouts/ConfirmButton';
 import OnlineOrderSummary from './OnlineOrderSummary';
+import { useTicketContext } from '../../contexts';
 
 export default function ChoiceOfTicket() {
   const [ticketsData, setTicketsData] = useState([]);
-  const [ticketSelected, setTicketSelected] = useState({});
-  const [hotelOrNot, setHotelOrNot] = useState({});
+  const { ticketSelected, setTicketSelected, hotelOrNot, setHotelOrNot } = useTicketContext();
+
   const { tickets } = useTicket();
 
   useEffect(() => {
