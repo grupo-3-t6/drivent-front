@@ -5,9 +5,11 @@ import ChoiceOfTicket from '../../../components/ChoiceOfTicket';
 import { useEnrollContext } from '../../../contexts/EnrollContext';
 import Warning from '../../../layouts/Warning';
 import ConfirmPayment from '../../../components/Payment/ConfirmPayment';
+import { useTicketContext } from '../../../contexts';
 
 export default function Payment() {
   const { enrolled } = useEnrollContext();
+  const { redirectToConfirmPayment } = useTicketContext();
 
   if (!enrolled) {
     return (
@@ -20,8 +22,7 @@ export default function Payment() {
   return (
     <>
       <StyledTypography variant="h4">Ingresso e pagamento</StyledTypography>
-      {/* <ChoiceOfTicket /> */}
-      <ConfirmPayment />
+      { redirectToConfirmPayment ? <ConfirmPayment /> : <ChoiceOfTicket /> }
     </>
   );
 }

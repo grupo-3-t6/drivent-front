@@ -32,7 +32,7 @@ export default function ChoiceOfTicket() {
         : ticketSelected.name === 'Presencial' ? <HotelOrNot hotelOrNot={hotelOrNot} setHotelOrNot={setHotelOrNot} /> : ''}
       { hotelOrNot.name && ticketSelected.name === 'Presencial' ? 
         <Subtitle>Fechado! O total ficou em <strong>R$ {ticketSelected.price + hotelOrNot.price}</strong>. Agora é só confirmar:</Subtitle> : ''}
-      {hotelOrNot.name && ticketSelected.name === 'Presencial' ? <ConfirmButton text = 'RESERVAR INGRESSO'/> : '' }
+      {hotelOrNot.name && ticketSelected.name === 'Presencial' ? <ConfirmButton text = 'RESERVAR INGRESSO' /> : '' }
     </Container>
   );
 }
