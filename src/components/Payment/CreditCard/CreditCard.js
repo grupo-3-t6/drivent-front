@@ -1,20 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import Cards from 'react-credit-cards';
 import 'react-credit-cards/es/styles-compiled.css';
 import { toast } from 'react-toastify';
 
 import Button from '../../Form/Button';
-import { checkExpiryDate } from './CardUtils';
+import { checkExpiryDate, checkCardData } from './CardUtils';
+// import UserContext from '../../../contexts/UserContext';
 
 export default function CreditCard() {
   const [cardData, setCardData] = useState({
-    number: '',
-    name: '',
-    expiry: '',
     cvc: '',
+    expiry: '',
     focused: '',
+    name: '',
+    number: '',
   });
+
+  // const { user } = useContext(UserContext);
 
   function handleInputFocus(e) {
     setCardData({ ...cardData, focused: e.target.name });
@@ -28,10 +31,14 @@ export default function CreditCard() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const { expiry } = cardData;
+    // const config = { headers: { Authorization: `Bearer ${user.token}` } };
+    const { cvc, expiry, name, number } = cardData;
 
     const expiryDate = expiry.split('/');
+
+    if (!checkCardData(number, name, cvc, expiryDate)) {
+      return;
+    }
 
     if (!checkExpiryDate(String(expiryDate))) {
       toast('Data de validade inválida');
