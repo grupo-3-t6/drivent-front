@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import Cards from 'react-credit-cards';
 import 'react-credit-cards/es/styles-compiled.css';
 import { toast } from 'react-toastify';
+import MuiButton from '@material-ui/core/Button';
 
-import Button from '../../Form/Button';
 import { checkExpiryDate, checkCardData } from './CardUtils';
 // import UserContext from '../../../contexts/UserContext';
 
@@ -44,10 +44,6 @@ export default function CreditCard() {
       toast('Data de validade inválida');
       return false;
     }
-  };
-
-  const buttonStyle = {
-    marginLeft: '-285px',
   };
 
   const { name, number, expiry, cvc, focused } = cardData;
@@ -101,7 +97,7 @@ export default function CreditCard() {
             />
           </InputSubcontainer>
         </InputsContainer>
-        <Button type="submit" style={buttonStyle}>
+        <Button type="submit" variant='contained'>
           FINALIZAR PAGAMENTO
         </Button>
       </form>
@@ -167,4 +163,8 @@ const ExpiryInput = styled.input`
 `;
 const CvcInput = styled.input`
   width: 25%;
+`;
+
+const Button = styled(MuiButton)`
+  margin: 57px 0 0 -285px !important;
 `;
