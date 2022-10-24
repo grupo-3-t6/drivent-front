@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import Cards from 'react-credit-cards';
 import 'react-credit-cards/es/styles-compiled.css';
 
+import Button from '../../Form/Button';
+
 export default function CreditCard() {
   const [cardData, setCardData] = useState({
     number: '',
@@ -24,6 +26,10 @@ export default function CreditCard() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+  };
+
+  const buttonStyle = {
+    marginLeft: '-285px',
   };
 
   const { name, number, expiry, cvc, focused } = cardData;
@@ -59,7 +65,9 @@ export default function CreditCard() {
             <CvcInput type="tel" name="cvc" placeholder="CVC" onChange={handleInputChange} onFocus={handleInputFocus} />
           </InputSubcontainer>
         </InputsContainer>
-        <button type="submit">FINALIZAR PAGAMENTO</button>
+        <Button type="submit" style={buttonStyle}>
+          FINALIZAR PAGAMENTO
+        </Button>
       </form>
     </Container>
   );
