@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Cards from 'react-credit-cards';
 import 'react-credit-cards/es/styles-compiled.css';
+import { toast } from 'react-toastify';
 
 import Button from '../../Form/Button';
+import { checkExpiryDate } from './CardUtils';
 
 export default function CreditCard() {
   const [cardData, setCardData] = useState({
@@ -26,6 +28,15 @@ export default function CreditCard() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const { expiry } = cardData;
+
+    const expiryDate = expiry.split('/');
+
+    if (!checkExpiryDate(String(expiryDate))) {
+      toast('Data de validade inválida');
+      return false;
+    }
   };
 
   const buttonStyle = {
