@@ -90,6 +90,7 @@ export default function CreditCard() {
     </Container>
   );
 }
+
 const Container = styled.div`
   max-width: 706px;
   height: 225px;
