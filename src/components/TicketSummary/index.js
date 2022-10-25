@@ -11,8 +11,8 @@ export default function TicketSummary() {
     <>
       <Subtitle>Ingresso escolhido</Subtitle>
       <Card>
-        {!hotelOrNot.name ? <TextCard>{ ticketSelected.name }</TextCard> : <TextCard>{ ticketSelected.name } + { hotelOrNot.name }</TextCard>}
-        {!hotelOrNot.name ? <SubtitleCard>R$ { ticketSelected.price }</SubtitleCard> : <SubtitleCard>R$ { ticketSelected.price + hotelOrNot.price }</SubtitleCard>}
+        {ticketSelected.name === 'Online' ? <TextCard>{ ticketSelected.name }</TextCard> : <TextCard>{ ticketSelected.name } + { hotelOrNot.name }</TextCard>}
+        {ticketSelected.name === 'Online' ? <SubtitleCard>R$ { ticketSelected.price }</SubtitleCard> : <SubtitleCard>R$ { ticketSelected.price + hotelOrNot.price }</SubtitleCard>}
       </Card>
     </>            
   );
