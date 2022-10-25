@@ -12,7 +12,7 @@ import { useTicketContext } from '../../contexts';
 
 export default function ChoiceOfTicket() {
   const [ticketsData, setTicketsData] = useState([]);
-  const { ticketSelected, setTicketSelected, hotelOrNot, setHotelOrNot } = useTicketContext();
+  const { ticketSelected, setTicketSelected, hotelOrNot } = useTicketContext();
 
   const { tickets } = useTicket();
 
@@ -29,7 +29,7 @@ export default function ChoiceOfTicket() {
         { ticketsData.length ? ticketsData.map(ticket => <Ticket key={ticket.id} name={ticket.name} price={ticket.price} isSelected={ticketSelected.name === ticket.name} setTicketSelected={setTicketSelected}/> ) : '' }
       </CardsBox>
       { ticketSelected.name === 'Online' ? <OnlineOrderSummary finalPrice={ticketSelected.price} />
-        : ticketSelected.name === 'Presencial' ? <HotelOrNot hotelOrNot={hotelOrNot} setHotelOrNot={setHotelOrNot} /> : ''}
+        : ticketSelected.name === 'Presencial' ? <HotelOrNot /> : ''}
       { hotelOrNot.name && ticketSelected.name === 'Presencial' ? 
         <Subtitle>Fechado! O total ficou em <strong>R$ {ticketSelected.price + hotelOrNot.price}</strong>. Agora é só confirmar:</Subtitle> : ''}
       {hotelOrNot.name && ticketSelected.name === 'Presencial' ? <ConfirmButton text = 'RESERVAR INGRESSO' /> : '' }
