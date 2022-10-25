@@ -109,7 +109,6 @@ const Container = styled.div`
   max-width: 706px;
   height: 225px;
   display: flex;
-  padding-top: 20px;
   form {
     width: 100%;
   }
