@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Cards from 'react-credit-cards';
 import 'react-credit-cards/es/styles-compiled.css';
@@ -32,17 +32,14 @@ export default function CreditCard() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // const config = { headers: { Authorization: `Bearer ${user.token}` } };
-    const { cvc, expiry, name, number } = cardData;
+    const { number, name, cvc, expiry } = cardData;
 
-    const expiryDate = expiry.split('/');
-
-    if (!checkCardData(number, name, cvc, expiryDate)) {
-      return;
+    if (!checkExpiryDate(expiry)) {
+      return toast('Cartão expirado');
     }
 
-    if (!checkExpiryDate(String(expiryDate))) {
-      toast('Data de validade inválida');
-      return false;
+    if (!checkCardData(number, name, cvc, expiry)) {
+      return;
     }
   };
 
@@ -89,7 +86,7 @@ export default function CreditCard() {
               onFocus={handleInputFocus}
             />
             <CvcInput
-              type="tel"
+              type="text"
               name="cvc"
               placeholder="CVC"
               pattern="\d{3,4}"
