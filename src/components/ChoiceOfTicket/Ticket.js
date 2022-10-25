@@ -7,7 +7,7 @@ export default function Ticket({ name, price, isSelected, setTicketSelected }) {
   return (
     <TicketContainer onClick={() => setTicketSelected( { name, price } )} isSelected={isSelected}>
       <TextCard>{name}</TextCard>
-      <SubtitleCard>R$ {price}</SubtitleCard>   
+      <SubtitleCard>{name.includes('Hotel') ? `+ R$ ${price}` : `R$ ${price}`}</SubtitleCard>   
     </TicketContainer>
   );
 }
