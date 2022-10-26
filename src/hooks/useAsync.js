@@ -15,7 +15,7 @@ export default function useAsync(handler, immediate = true) {
       setLoading(false);
       return data;
     } catch (err) {
-      setError(error);
+      setError(err.response.data.message);
       setLoading(false);
       throw err;
     }
@@ -23,8 +23,7 @@ export default function useAsync(handler, immediate = true) {
 
   useEffect(() => {
     if (immediate) {
-      // eslint-disable-next-line no-console
-      act().catch((err) => console.log(err.message));
+      act();
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
