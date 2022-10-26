@@ -17,8 +17,5 @@ export async function pay(body, token) {
     } 
   });
 
-  // eslint-disable-next-line no-console
-  console.log(response.data);
-
   return response.data;
 }
