@@ -7,10 +7,11 @@ import MuiButton from '@material-ui/core/Button';
 
 import { checkExpiryDate, checkCardData } from './CardUtils';
 import usePayment from '../../../hooks/api/usePayment';
-// import UserContext from '../../../contexts/UserContext';
+import { usePaymentContext } from '../../../contexts/PaymentContext';
 
 export default function CreditCard() {
-  const { pay } = usePayment();
+  const { pay, getPayment } = usePayment();
+  const { setPaymentData } = usePaymentContext();
   const [cardData, setCardData] = useState({
     cvc: '',
     expiry: '',
@@ -18,8 +19,6 @@ export default function CreditCard() {
     name: '',
     number: '',
   });
-
-  // const { user } = useContext(UserContext);
 
   function handleInputFocus(e) {
     setCardData({ ...cardData, focused: e.target.name });
@@ -33,7 +32,7 @@ export default function CreditCard() {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-    // const config = { headers: { Authorization: `Bearer ${user.token}` } };
+   
     const { number, name, cvc, expiry } = cardData;
 
     if (!checkExpiryDate(expiry)) {
@@ -43,8 +42,14 @@ export default function CreditCard() {
     if (!checkCardData(number, name, cvc, expiry)) {
       return;
     }
-
-    await pay();
+    try {
+      await pay();
+    } catch (error) {
+      toast(error.response.data.message);
+    } finally {
+      const data = await getPayment();
+      setPaymentData(data);
+    }
   };
 
   const { name, number, expiry, cvc, focused } = cardData;

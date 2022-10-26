@@ -1,15 +1,25 @@
 import styled from 'styled-components';
 import Typography from '@material-ui/core/Typography';
+import { useEffect } from 'react';
 
 import ChoiceOfTicket from '../../../components/ChoiceOfTicket';
 import { useEnrollContext } from '../../../contexts/EnrollContext';
 import Warning from '../../../layouts/Warning';
 import ConfirmPayment from '../../../components/Payment/ConfirmPayment';
-import { useTicketContext } from '../../../contexts';
+import { useTicketContext, usePaymentContext } from '../../../contexts';
+import usePayment from '../../../hooks/api/usePayment';
 
 export default function Payment() {
   const { enrolled } = useEnrollContext();
   const { redirectToConfirmPayment } = useTicketContext();
+  const { paymentData, setPaymentData } = usePaymentContext();
+  const { getPayment } = usePayment();
+
+  useEffect(async() => {
+    const data = await getPayment();
+
+    setPaymentData(data);
+  }, []);
 
   if (!enrolled) {
     return (
@@ -22,7 +32,7 @@ export default function Payment() {
   return (
     <>
       <StyledTypography variant="h4">Ingresso e pagamento</StyledTypography>
-      { redirectToConfirmPayment ? <ConfirmPayment /> : <ChoiceOfTicket /> }
+      { redirectToConfirmPayment || paymentData ? <ConfirmPayment /> : <ChoiceOfTicket /> }
     </>
   );
 }
