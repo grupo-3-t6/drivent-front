@@ -1,5 +1,4 @@
 import api from './api';
-import useTicketBody from '../hooks/useTicketBody';
 
 export async function getPayment(token) {
   const response = await api.get('/payment', { 
@@ -11,9 +10,7 @@ export async function getPayment(token) {
   return response.data;
 }
 
-export async function pay(token) {
-  const body = useTicketBody();   
-
+export async function pay(body, token) {
   const response = await api.post('/payment', body, { 
     headers: {
       Authorization: `Bearer ${token}`,
