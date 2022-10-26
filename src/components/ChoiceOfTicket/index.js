@@ -1,4 +1,3 @@
-// import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import CardsBox from '../../layouts/CardsBox';
@@ -11,16 +10,9 @@ import OnlineOrderSummary from './OnlineOrderSummary';
 import { useTicketContext } from '../../contexts';
 
 export default function ChoiceOfTicket() {
-  // const [ticketsData, setTicketsData] = useState([]);
   const { ticketSelected, setTicketSelected, hotelOrNot } = useTicketContext();
 
   const { tickets } = useTicket();
-
-  // useEffect(() => {
-  //   if(tickets) {
-  //     setTicketsData(tickets);
-  //   }
-  // }, [tickets]);
 
   return (
     <Container>
