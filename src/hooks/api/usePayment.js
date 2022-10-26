@@ -13,7 +13,7 @@ export default function usePayment() {
     loading: getPaymentLoading,
     error: getPaymentError,
     act: getPayment,
-  } = useAsync(() => paymentApi.getPayment(token));
+  } = useAsync(() => paymentApi.getPayment(token), false);
 
   const {
     data: postPaymentData,
