@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
 
 export default function useAsync(handler, immediate = true) {
   const [data, setData] = useState(null);
@@ -23,7 +24,7 @@ export default function useAsync(handler, immediate = true) {
 
   useEffect(() => {
     if (immediate) {
-      act();
+      act().catch((error) => toast(error.response.data.message)); 
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
