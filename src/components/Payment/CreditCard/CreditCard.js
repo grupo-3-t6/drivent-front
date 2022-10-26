@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import Cards from 'react-credit-cards';
 import 'react-credit-cards/es/styles-compiled.css';
@@ -6,9 +6,11 @@ import { toast } from 'react-toastify';
 import MuiButton from '@material-ui/core/Button';
 
 import { checkExpiryDate, checkCardData } from './CardUtils';
+import usePayment from '../../../hooks/api/usePayment';
 // import UserContext from '../../../contexts/UserContext';
 
 export default function CreditCard() {
+  const { pay } = usePayment();
   const [cardData, setCardData] = useState({
     cvc: '',
     expiry: '',
@@ -29,7 +31,7 @@ export default function CreditCard() {
     setCardData({ ...cardData, [name]: value });
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     // const config = { headers: { Authorization: `Bearer ${user.token}` } };
     const { cvc, expiry, name, number } = cardData;
@@ -44,6 +46,8 @@ export default function CreditCard() {
       toast('Data de validade inválida');
       return false;
     }
+
+    await pay();
   };
 
   const { name, number, expiry, cvc, focused } = cardData;
