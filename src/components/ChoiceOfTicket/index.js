@@ -14,9 +14,13 @@ export default function ChoiceOfTicket() {
   const [ticketSelected, setTicketSelected] = useState({});
   const [hotelOrNot, setHotelOrNot] = useState({});
   const { tickets } = useTicket();
-  const { setTicketInfo } = useTicketContext();
+  const { setTicketInfo, ticketInfo } = useTicketContext();
   
   useEffect(() => {
+    if(ticketInfo.ticketSelected) {
+      setTicketSelected(ticketInfo.ticketSelected);
+      setHotelOrNot(ticketInfo.hotelOrNot);
+    }
     if(tickets) {
       setTicketsData(tickets);
     }
@@ -26,13 +30,12 @@ export default function ChoiceOfTicket() {
     let finalTicket = {};
     if(ticketSelected.name === 'Presencial') {
       finalTicket = {
-        name: ticketSelected.name + ' ' + hotelOrNot.name,
-        price: ticketSelected.price + hotelOrNot.price
+        ticketSelected,
+        hotelOrNot
       };
     }else {
-      finalTicket = ticketSelected;
+      finalTicket = { ticketSelected, hotelOrNot: {} };
     }
-    console.log(finalTicket);
     setTicketInfo(finalTicket);
   }
 
