@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-export default function ConfirmButton({ text }) {
+export default function ConfirmButton({ text, onClick }) {
   return (
-    <Container>
+    <Container onClick={onClick}>
       {text}
     </Container>
   );
