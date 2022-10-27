@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import Cards from 'react-credit-cards';
 import 'react-credit-cards/es/styles-compiled.css';
 import { toast } from 'react-toastify';
+import MuiButton from '@material-ui/core/Button';
 
-import Button from '../../Form/Button';
 import { checkExpiryDate, checkCardData } from './CardUtils';
-// import UserContext from '../../../contexts/UserContext';
+import usePayment from '../../../hooks/api/usePayment';
+import { usePaymentContext } from '../../../contexts/PaymentContext';
 
 export default function CreditCard() {
+  const { pay, getPayment } = usePayment();
+  const { setPaymentData } = usePaymentContext();
   const [cardData, setCardData] = useState({
     cvc: '',
     expiry: '',
@@ -16,8 +19,6 @@ export default function CreditCard() {
     name: '',
     number: '',
   });
-
-  // const { user } = useContext(UserContext);
 
   function handleInputFocus(e) {
     setCardData({ ...cardData, focused: e.target.name });
@@ -29,9 +30,9 @@ export default function CreditCard() {
     setCardData({ ...cardData, [name]: value });
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    // const config = { headers: { Authorization: `Bearer ${user.token}` } };
+   
     const { number, name, cvc, expiry } = cardData;
 
     if (!checkExpiryDate(expiry)) {
@@ -41,10 +42,14 @@ export default function CreditCard() {
     if (!checkCardData(number, name, cvc, expiry)) {
       return;
     }
-  };
-
-  const buttonStyle = {
-    marginLeft: '-285px',
+    try {
+      await pay();
+    } catch (error) {
+      toast(error.response.data.message);
+    } finally {
+      const data = await getPayment();
+      setPaymentData(data);
+    }
   };
 
   const { name, number, expiry, cvc, focused } = cardData;
@@ -98,7 +103,7 @@ export default function CreditCard() {
             />
           </InputSubcontainer>
         </InputsContainer>
-        <Button type="submit" style={buttonStyle}>
+        <Button type="submit" variant='contained'>
           FINALIZAR PAGAMENTO
         </Button>
       </form>
@@ -110,7 +115,6 @@ const Container = styled.div`
   max-width: 706px;
   height: 225px;
   display: flex;
-  padding-top: 20px;
   form {
     width: 100%;
   }
@@ -164,4 +168,8 @@ const ExpiryInput = styled.input`
 `;
 const CvcInput = styled.input`
   width: 25%;
+`;
+
+const Button = styled(MuiButton)`
+  margin: 57px 0 0 -285px !important;
 `;

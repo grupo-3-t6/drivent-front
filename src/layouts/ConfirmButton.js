@@ -1,8 +1,12 @@
 import styled from 'styled-components';
 
+import { useTicketContext } from '../contexts/TicketContext';
+
 export default function ConfirmButton({ text }) {
+  const { setRedirectToConfirmPayment } = useTicketContext();
+
   return (
-    <Container>
+    <Container onClick={() => setRedirectToConfirmPayment(true)}>
       {text}
     </Container>
   );
