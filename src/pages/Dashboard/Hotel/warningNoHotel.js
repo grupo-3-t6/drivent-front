@@ -1,11 +1,17 @@
-import React from 'react';
+import { useEffect } from 'react';
 import Warning from '../../../layouts/Warning';
-import { useTicketContext } from '../../../contexts';
 import { usePaymentContext } from '../../../contexts';
+import usePayment from '../../../hooks/api/usePayment';
 
 export default function WarningNoHotel() {
-  const { ticketSelected, hotelOrNot } = useTicketContext();
-  const { paymentData } = usePaymentContext();
+  const { paymentData, setPaymentData } = usePaymentContext();
+  const { getPayment } = usePayment();
+
+  useEffect(async() => {
+    const data = await getPayment();
+
+    setPaymentData(data);
+  }, []);
 
   return (
     <>
@@ -13,13 +19,13 @@ export default function WarningNoHotel() {
         <p> 
           Você precisa ter confirmado pagamento antes de fazer a escolha de hospedagem
         </p> 
-      </Warning> : ticketSelected.name === 'Online' || hotelOrNot.name === 'Sem Hotel' ?  
+      </Warning> : paymentData.ticket.name === 'Online' || paymentData.stay.name === 'Sem Hotel' ?  
       
         <Warning> 
           <p> 
             Sua modalidade de ingresso não inclui hospedagem Prossiga para escolha de atividades
           </p> 
-        </Warning> : '' 
+        </Warning> : 'Coloque as opções de hotéis aqui!' 
 
       }  
     </>
