@@ -12,7 +12,7 @@ const Container = styled.h6`
 
   p {
     height: 46px;
-    width: 388px;
+    width: 470px;
     font: 400 20px 'Roboto', sans-serif;
     text-align: center;
     color: #8e8e8e;

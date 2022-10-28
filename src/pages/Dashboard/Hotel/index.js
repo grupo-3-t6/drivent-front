@@ -1,3 +1,10 @@
+import React from 'react';
+import WarningNoHotel from './warningNoHotel';
+
 export default function Hotel() {
-  return 'Hotel: Em breve!';
+  return (
+    <>
+      <WarningNoHotel/>
+    </>
+  );
 }
