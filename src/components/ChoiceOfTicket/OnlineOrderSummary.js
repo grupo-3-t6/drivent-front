@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import ConfirmButton from '../../layouts/ConfirmButton';
 import Subtitle from '../../layouts/Subtitle';
 
-export default function OnlineOrderSummary({ finalPrice, recieve }) {
+export default function OnlineOrderSummary({ finalPrice }) {
   return (
     <Container>
       <Subtitle>Fechado! O total ficou em <strong>R$ {finalPrice}</strong>. Agora é só confirmar:</Subtitle>
-      <ConfirmButton onClick = {recieve} text = 'RESERVAR INGRESSO'/> 
+      <ConfirmButton text = 'RESERVAR INGRESSO'/> 
     </Container> 
   );
 }
